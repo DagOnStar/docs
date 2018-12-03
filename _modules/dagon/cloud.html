@@ -1,0 +1,624 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dagon.cloud &mdash; DagOn* 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> DagOn*
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stager.html">Stager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tasks_supported.html">Tasks supported</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other.html">Other</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DagOn*</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../dagon.html">dagon</a> &raquo;</li>
+        
+      <li>dagon.cloud</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dagon.cloud</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">libcloud.compute.providers</span> <span class="k">import</span> <span class="n">get_driver</span>
+<span class="kn">from</span> <span class="nn">libcloud.compute.types</span> <span class="k">import</span> <span class="n">NodeState</span>
+<span class="kn">from</span> <span class="nn">libcloud.compute.types</span> <span class="k">import</span> <span class="n">Provider</span>
+
+<span class="kn">from</span> <span class="nn">dagon.config</span> <span class="k">import</span> <span class="n">read_config</span>
+
+
+<div class="viewcode-block" id="CloudManager"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.CloudManager">[docs]</a><span class="k">class</span> <span class="nc">CloudManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manages the connection with the cloud providers using LibCloud</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CloudManager.get_instance"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.CloudManager.get_instance">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span><span class="n">keyparams</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flavour</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">instance_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get or create an instance in the specified cloud provider</span>
+
+<span class="sd">        :param keyparams: dictionary with the ssh key</span>
+<span class="sd">        :type keyparams: dict(str, str)</span>
+
+<span class="sd">        :param provider: cloud provider</span>
+<span class="sd">        :type provider: :class:`libcloud.compute.types.Provider`</span>
+
+<span class="sd">        :param name: instance name (for existing instances)</span>
+<span class="sd">        :type name: str</span>
+
+<span class="sd">        :param flavour: dictionary with the instance configuration (size, region, operating system)</span>
+<span class="sd">        :type flavour: dict</span>
+
+<span class="sd">        :param instance_id: instance id in the cloud provider (for existing instances)</span>
+<span class="sd">        :type instance_id: str</span>
+
+<span class="sd">        :return: instance created</span>
+<span class="sd">        :rtype: :class:`libcloud.compute.base.Node`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">driver</span> <span class="o">=</span> <span class="n">get_driver</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">provider</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">provider</span> <span class="o">==</span> <span class="n">Provider</span><span class="o">.</span><span class="n">GCE</span><span class="p">:</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="n">driver</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">],</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;secret&#39;</span><span class="p">],</span> <span class="n">project</span><span class="o">=</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;project&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="n">driver</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="p">)</span>
+        <span class="n">manager</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="nb">str</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">create_instance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">flavour</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">)</span> <span class="k">if</span> <span class="n">flavour</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> \
+            <span class="k">else</span> <span class="n">CloudManager</span><span class="o">.</span><span class="n">get_existing_instance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">instance_id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">CloudManager</span><span class="o">.</span><span class="n">wait_until_running</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">node</span></div>
+
+<div class="viewcode-block" id="CloudManager.wait_until_running"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.CloudManager.wait_until_running">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">wait_until_running</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        wait until an instance is running</span>
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: Libcloud driver</span>
+
+<span class="sd">        :param node: node to waite</span>
+<span class="sd">        :type node: :class:`libcloud.compute.base.Node`</span>
+
+<span class="sd">        :return: instance updated</span>
+<span class="sd">        :rtype node: :class:`libcloud.compute.base.Node`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">while</span> <span class="n">node</span><span class="o">.</span><span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">NodeState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">CloudManager</span><span class="o">.</span><span class="n">get_existing_instance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">node</span></div>
+
+<div class="viewcode-block" id="CloudManager.create_instance"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.CloudManager.create_instance">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_instance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">flavour</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create a new instance on the cloud provider</span>
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: Libcloud driver</span>
+
+<span class="sd">        :param name: instance name</span>
+<span class="sd">        :param name: str</span>
+
+<span class="sd">        :param flavour: dictionary with the instance configuration (size, region, operating system)</span>
+<span class="sd">        :type flavour: dict</span>
+
+<span class="sd">        :param keyparams: dictionary with the ssh key</span>
+<span class="sd">        :type keyparams: dict(str, str)</span>
+
+<span class="sd">        :return: instance created</span>
+<span class="sd">        :rtype node: :class:`libcloud.compute.base.Node`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">flavour</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The characteristics of the image has not been specified&#39;</span><span class="p">)</span>
+
+        <span class="n">sizes</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">list_sizes</span><span class="p">()</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]]</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_image</span><span class="p">(</span><span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">])</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Size or image doesn</span><span class="se">\&#39;</span><span class="s1">t exists&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">CREATE</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">createPairKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;keypath&#39;</span><span class="p">],</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;cloudargs&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">GET</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">getExistingPairKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;keyname&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">IMPORT</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">importKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;keypath&#39;</span><span class="p">])</span>
+
+        <span class="n">node</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                                <span class="n">ex_keyname</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">node</span></div>
+
+<div class="viewcode-block" id="CloudManager.get_existing_instance"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.CloudManager.get_existing_instance">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_existing_instance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return an existing instance from the cloud provider. The id, name or uuid is used to get the instance.</span>
+
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: Libcloud driver</span>
+
+<span class="sd">        :param id: instance id</span>
+<span class="sd">        :type id: str</span>
+
+<span class="sd">        :param name: instance name</span>
+<span class="sd">        :type name: str</span>
+
+<span class="sd">        :param uuid: instance uuid</span>
+<span class="sd">        :type uuid: str</span>
+
+<span class="sd">        :return: instance</span>
+<span class="sd">        :rtype node: :class:`libcloud.compute.base.Node`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">uuid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Must specified an intance</span><span class="se">\&#39;</span><span class="s1">s id or name&#39;</span><span class="p">)</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">list_nodes</span><span class="p">()</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">uuid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">uuid</span> <span class="o">==</span> <span class="n">uuid</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Instance doesn</span><span class="se">\&#39;</span><span class="s1">t exists&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="KeyOptions"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.KeyOptions">[docs]</a><span class="k">class</span> <span class="nc">KeyOptions</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents the different options to manage the keys instance. The key could be create from the scratch,</span>
+<span class="sd">    import an existing local key or get an existing key on the cloud provider</span>
+
+<span class="sd">    :cvar CREATE: create a new key</span>
+<span class="sd">    :cvar IMPORT: import a key</span>
+<span class="sd">    :cvar GET: get an existing key</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">CREATE</span> <span class="o">=</span> <span class="s2">&quot;CREATE&quot;</span>
+    <span class="n">IMPORT</span> <span class="o">=</span> <span class="s2">&quot;IMPORT&quot;</span>
+    <span class="n">GET</span> <span class="o">=</span> <span class="s2">&quot;GET&quot;</span></div>
+
+
+<div class="viewcode-block" id="KeyPair"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.KeyPair">[docs]</a><span class="k">class</span> <span class="nc">KeyPair</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="KeyPair.generate_RSA"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.KeyPair.generate_RSA">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_RSA</span><span class="p">(</span><span class="n">bits</span><span class="o">=</span><span class="mi">2048</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate an RSA keypair with an exponent of 65537 in PEM format</span>
+
+<span class="sd">        :param bits: bits The key length in bits</span>
+<span class="sd">        :type bits: int</span>
+
+<span class="sd">        :return: Return private key and public key</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="k">import</span> <span class="n">RSA</span>
+        <span class="n">new_key</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mi">65537</span><span class="p">)</span>
+        <span class="n">public_key</span> <span class="o">=</span> <span class="n">new_key</span><span class="o">.</span><span class="n">publickey</span><span class="p">()</span><span class="o">.</span><span class="n">exportKey</span><span class="p">(</span><span class="s2">&quot;OpenSSH&quot;</span><span class="p">)</span>
+        <span class="n">private_key</span> <span class="o">=</span> <span class="n">new_key</span><span class="o">.</span><span class="n">exportKey</span><span class="p">(</span><span class="s2">&quot;PEM&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">private_key</span><span class="p">,</span> <span class="n">public_key</span></div>
+
+<div class="viewcode-block" id="KeyPair.writeKey"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.KeyPair.writeKey">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">writeKey</span><span class="p">(</span><span class="n">privateKey</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        writes the private key in a file</span>
+
+<span class="sd">        :param privateKey: key string</span>
+<span class="sd">        :type privateKey: str</span>
+
+<span class="sd">        :param filename: path to the file where the key will be saved</span>
+<span class="sd">        :type filename: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chmod</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content_file</span><span class="p">:</span>
+            <span class="n">chmod</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="mi">0600</span><span class="p">)</span>
+            <span class="n">content_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">privateKey</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="KeyPair.createPairKey"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.KeyPair.createPairKey">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createPairKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create a new key on the cloud provider</span>
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: Libcloud driver</span>
+
+<span class="sd">        :param filename: path to the file where the key will be saved</span>
+<span class="sd">        :type filename: str</span>
+
+<span class="sd">        :param args: arguments to create the key</span>
+<span class="sd">        :type args: dict()</span>
+
+<span class="sd">        :return: key pair object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">getargspec</span>
+
+        <span class="c1"># CHECK FOR THE PARAMS OF THE FUNCTION</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">getargspec</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">create_key_pair</span><span class="p">)</span>
+        <span class="n">foo_args</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">args</span>
+        <span class="n">foo_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">foo_args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="n">foo_params</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span>
+
+        <span class="c1"># CREATE NEW KEY</span>
+        <span class="n">key_pair</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">create_key_pair</span><span class="p">(</span><span class="o">**</span><span class="n">foo_params</span><span class="p">)</span>
+        <span class="n">private_key</span> <span class="o">=</span> <span class="n">key_pair</span><span class="o">.</span><span class="n">private_key</span>
+        <span class="k">if</span> <span class="n">private_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">private_key</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;private_key&#39;</span><span class="p">]</span>
+        <span class="n">KeyPair</span><span class="o">.</span><span class="n">writeKey</span><span class="p">(</span><span class="n">private_key</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">key_pair</span></div>
+
+<div class="viewcode-block" id="KeyPair.getExistingPairKey"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.KeyPair.getExistingPairKey">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">getExistingPairKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns an existing pair key from the cloud provider</span>
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: Libcloud driver</span>
+
+<span class="sd">        :param keyname: name of the key on the cloud provider</span>
+<span class="sd">        :type keyname: str</span>
+
+<span class="sd">        :return: key pair object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">list_key_pairs</span><span class="p">()</span>
+        <span class="n">key_pair</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">keyname</span><span class="p">]</span>
+        <span class="n">key_pair</span> <span class="o">=</span> <span class="n">key_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">key_pair</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">key_pair</span></div>
+
+<div class="viewcode-block" id="KeyPair.importKey"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.KeyPair.importKey">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">importKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">key_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        import an existing key from a local file</span>
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: Libcloud driver</span>
+
+<span class="sd">        :param key_path: path to the key</span>
+<span class="sd">        :param key_path: str</span>
+
+<span class="sd">        :return: key pair object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">key_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">key_path</span><span class="p">)</span>
+        <span class="n">key_pair</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">import_key_pair_from_file</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">key_path</span><span class="p">,</span>
+                                                  <span class="n">key_file_path</span><span class="o">=</span><span class="n">key_file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">key_pair</span></div></div>
+
+
+<div class="viewcode-block" id="EC2"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.EC2">[docs]</a><span class="k">class</span> <span class="nc">EC2</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manages the creation of instances on Amazon EC2 using libcloud</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="EC2.createInstance"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.EC2.createInstance">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createInstance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">flavour</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create a new instance on amazon EC2</span>
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: EC2 Libcloud driver</span>
+
+<span class="sd">        :param name: instance name</span>
+<span class="sd">        :param name: str</span>
+
+<span class="sd">        :param flavour: dictionary with the instance configuration (size, region, operating system)</span>
+<span class="sd">        :type flavour: dict</span>
+
+<span class="sd">        :param keyparams: dictionary with the ssh key</span>
+<span class="sd">        :type keyparams: dict(str, str)</span>
+
+<span class="sd">        :return: instance created</span>
+<span class="sd">        :rtype node: :class:`libcloud.compute.base.Node`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">flavour</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The characteristics of the image has not been specified&#39;</span><span class="p">)</span>
+
+        <span class="n">sizes</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">list_sizes</span><span class="p">()</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]]</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_image</span><span class="p">(</span><span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">])</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Size or image doesn</span><span class="se">\&#39;</span><span class="s1">t exists&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">CREATE</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">createPairKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;key_path&#39;</span><span class="p">],</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;cloud_args&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">GET</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">getExistingPairKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;cloud_args&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">IMPORT</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">importKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;key_path&#39;</span><span class="p">])</span>
+
+        <span class="n">node</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                                <span class="n">ex_keyname</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">node</span></div></div>
+
+
+<div class="viewcode-block" id="DIGITALOCEAN"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.DIGITALOCEAN">[docs]</a><span class="k">class</span> <span class="nc">DIGITALOCEAN</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manages the creation of instances on DigitalOcean using libcloud</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DIGITALOCEAN.createInstance"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.DIGITALOCEAN.createInstance">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createInstance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">flavour</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create a new instance on DigitalOcean</span>
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: DigitalOcean Libcloud driver</span>
+
+<span class="sd">        :param name: instance name</span>
+<span class="sd">        :param name: str</span>
+
+<span class="sd">        :param flavour: dictionary with the instance configuration (size, region, operating system)</span>
+<span class="sd">        :type flavour: dict</span>
+
+<span class="sd">        :param keyparams: dictionary with the ssh key</span>
+<span class="sd">        :type keyparams: dict(str, str)</span>
+
+<span class="sd">        :return: instance created</span>
+<span class="sd">        :rtype node: :class:`libcloud.compute.base.Node`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">flavour</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The characteristics of the image has not been specified&#39;</span><span class="p">)</span>
+
+        <span class="n">sizes</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">list_sizes</span><span class="p">()</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]]</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_image</span><span class="p">(</span><span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">])</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">locations</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">list_locations</span><span class="p">()</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">locations</span> <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]]</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">location</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">location</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Size, location or image doesn</span><span class="se">\&#39;</span><span class="s1">t exists&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">CREATE</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">createPairKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;key_path&#39;</span><span class="p">],</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;cloudargs&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">GET</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">getExistingPairKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;keyname&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">KeyOptions</span><span class="o">.</span><span class="n">IMPORT</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">KeyPair</span><span class="o">.</span><span class="n">importKey</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;keypath&#39;</span><span class="p">])</span>
+
+        <span class="n">node</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+                                <span class="n">ex_create_attr</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ssh_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">]})</span>
+        <span class="k">return</span> <span class="n">node</span></div></div>
+
+
+<div class="viewcode-block" id="GCE"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.GCE">[docs]</a><span class="k">class</span> <span class="nc">GCE</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manages the creation of instances on google cloud using libcloud</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GCE.createInstance"><a class="viewcode-back" href="../../docs/dagon.cloud.html#dagon.cloud.GCE.createInstance">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createInstance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">flavour</span><span class="p">,</span> <span class="n">keyparams</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create a new instance on google cloud</span>
+
+<span class="sd">        :param conn: driver to the cloud provider</span>
+<span class="sd">        :type conn: google cloud Libcloud driver</span>
+
+<span class="sd">        :param name: instance name</span>
+<span class="sd">        :param name: str</span>
+
+<span class="sd">        :param flavour: dictionary with the instance configuration (size, region, operating system)</span>
+<span class="sd">        :type flavour: dict</span>
+
+<span class="sd">        :param keyparams: dictionary with the ssh key</span>
+<span class="sd">        :type keyparams: dict(str, str)</span>
+
+<span class="sd">        :return: instance created</span>
+<span class="sd">        :rtype node: :class:`libcloud.compute.base.Node`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">flavour</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The characteristics of the image has not been specified&#39;</span><span class="p">)</span>
+
+        <span class="n">image</span> <span class="o">=</span> <span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">flavour</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span>
+
+        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;public_key&#39;</span><span class="p">],</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]),</span>
+             <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;ssh-keys&quot;</span><span class="p">}]}</span>
+
+        <span class="n">KeyPair</span><span class="o">.</span><span class="n">writeKey</span><span class="p">(</span><span class="n">keyparams</span><span class="p">[</span><span class="s2">&quot;private_key&quot;</span><span class="p">],</span> <span class="n">keyparams</span><span class="p">[</span><span class="s1">&#39;keypath&#39;</span><span class="p">])</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">ex_metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">node</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Raffaele Montella
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

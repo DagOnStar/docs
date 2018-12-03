@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tasks supported &mdash; DagOn* 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modules documentation" href="modules.html" />
+    <link rel="prev" title="Stager" href="stager.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> DagOn*
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stager.html">Stager</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tasks supported</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#batch-task">Batch task</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#local-batch-task">Local batch task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remote-batch-task">Remote batch task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-task">Cloud task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-task">Docker task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slurm-task">Slurm task</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DagOn*</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tasks supported</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tasks_supported.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tasks-supported">
+<h1>Tasks supported<a class="headerlink" href="#tasks-supported" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="25%" />
+<col width="17%" />
+<col width="25%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">Constant</th>
+<th class="head">Module</th>
+<th class="head">Documentation</th>
+<th class="head">External docs</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Batch</td>
+<td>BATCH</td>
+<td>dagon.batch</td>
+<td><span class="xref std std-doc">click</span></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>CloudTask</td>
+<td>CLOUD</td>
+<td>dagon.remote</td>
+<td><span class="xref std std-doc">click</span></td>
+<td><a class="reference external" href="https://libcloud.readthedocs.io">Apache Libcloud</a></td>
+</tr>
+<tr class="row-even"><td>Docker</td>
+<td>DOCKER</td>
+<td>dagon.docker_task</td>
+<td><span class="xref std std-doc">click</span></td>
+<td><a class="reference external" href="https://www.docker.com/">Docker</a></td>
+</tr>
+<tr class="row-odd"><td>Slurm</td>
+<td>SLURM</td>
+<td>dagon.batch</td>
+<td><span class="xref std std-doc">click</span></td>
+<td><a class="reference external" href="https://slurm.schedmd.com/">Slurm</a></td>
+</tr>
+</tbody>
+</table>
+<div class="graphviz"><img src="_images/inheritance-43c08cb0c02c7807632b1d432b03963351d5f5ca.png" alt="Inheritance diagram of dagon.task.Task, dagon.batch.Batch, dagon.remote.RemoteTask, dagon.remote.CloudTask, dagon.docker_task.DockerTask, dagon.docker_task.DockerRemoteTask, dagon.batch.Slurm, dagon.batch.RemoteSlurm" usemap="#inheritancea2f0568dd4" class="inheritance graphviz" /></div>
+<map id="inheritancea2f0568dd4" name="inheritancea2f0568dd4">
+<area shape="rect" id="node1" href="docs/dagon.html#dagon.batch.Batch" target="_top" title="**Executes a Batch task**" alt="" coords="245,56,317,81"/>
+<area shape="rect" id="node6" href="docs/dagon.html#dagon.docker_task.DockerTask" target="_top" title="DockerTask" alt="" coords="367,55,465,80"/>
+<area shape="rect" id="node8" href="docs/dagon.html#dagon.batch.Slurm" target="_top" title="**Run a task using Slurm**" alt="" coords="380,104,452,129"/>
+<area shape="rect" id="node2" href="docs/dagon.html#dagon.task.Task" target="_top" title="**Represents a task executed by DagOn**" alt="" coords="125,31,197,56"/>
+<area shape="rect" id="node4" href="docs/dagon.html#dagon.remote.RemoteTask" target="_top" title="**Representates a task that is executed in a cloud instance, remote docker container," alt="" coords="365,5,467,31"/>
+<area shape="rect" id="node3" href="docs/dagon.html#dagon.remote.CloudTask" target="_top" title="Class that represents a task executed on a cloud instance" alt="" coords="544,5,632,31"/>
+<area shape="rect" id="node5" href="docs/dagon.html#dagon.docker_task.DockerRemoteTask" target="_top" title="DockerRemoteTask" alt="" coords="515,55,661,80"/>
+<area shape="rect" id="node7" href="docs/dagon.html#dagon.batch.RemoteSlurm" target="_top" title="** Represent a task that runs on a remote slurm deployment **" alt="" coords="533,104,643,129"/>
+</map><div class="section" id="batch-task">
+<h2>Batch task<a class="headerlink" href="#batch-task" title="Permalink to this headline">¶</a></h2>
+<p>Task executed on the default shell (commonly <cite>bash</cite>) of the operating system of the machine when is called. It is composed of one or more instructions sequentially executed. This type of class can be executed both, locally or in a remote machine. In the second case an valid SSH credentials must be provided.</p>
+<div class="section" id="local-batch-task">
+<h3>Local batch task<a class="headerlink" href="#local-batch-task" title="Permalink to this headline">¶</a></h3>
+<p>Regular Batch task that runs on the same machine where the user called <code class="docutils literal notranslate"><span class="pre">DagOn*</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">taskA</span> <span class="o">=</span> <span class="n">DagonTask</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">BATCH</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;mkdir output;hostname &gt; output/f1.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remote-batch-task">
+<h3>Remote batch task<a class="headerlink" href="#remote-batch-task" title="Permalink to this headline">¶</a></h3>
+<p>Batch task runs over a remote machine. Regular Batch tasks takes this behavior where is passed as a argument the <code class="docutils literal notranslate"><span class="pre">IP</span> <span class="pre">Address</span></code>, <code class="docutils literal notranslate"><span class="pre">username</span></code> and if it is necessary the path to the <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">key</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">taskA</span> <span class="o">=</span> <span class="n">DagonTask</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">BATCH</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;mkdir output;hostname &gt; output/f1.txt&quot;</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="s2">&quot;111.111.111.111&quot;</span><span class="p">,</span> <span class="n">ssh_username</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="n">keypath</span><span class="o">=</span><span class="s2">&quot;/path/to/key&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="xref std std-doc">See more.</span></p>
+</div>
+</div>
+<div class="section" id="cloud-task">
+<h2>Cloud task<a class="headerlink" href="#cloud-task" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="docker-task">
+<h2>Docker task<a class="headerlink" href="#docker-task" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="slurm-task">
+<h2>Slurm task<a class="headerlink" href="#slurm-task" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modules.html" class="btn btn-neutral float-right" title="Modules documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="stager.html" class="btn btn-neutral" title="Stager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Raffaele Montella
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

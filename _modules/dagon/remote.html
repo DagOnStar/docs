@@ -77,8 +77,15 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stager.html">Stager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tasks_supported.html">Tasks supported</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other.html">Other</a></li>
+</ul>
+
             
           
         </div>
@@ -145,11 +152,11 @@
 <span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">abspath</span>
 
 <span class="kn">from</span> <span class="nn">communication.ssh</span> <span class="k">import</span> <span class="n">SSHManager</span>
-<span class="kn">from</span> <span class="nn">dagon.cloud.cloud_manager</span> <span class="k">import</span> <span class="n">CloudManager</span>
+<span class="kn">from</span> <span class="nn">dagon.cloud</span> <span class="k">import</span> <span class="n">CloudManager</span>
 <span class="kn">from</span> <span class="nn">task</span> <span class="k">import</span> <span class="n">Task</span>
 
 
-<div class="viewcode-block" id="RemoteTask"><a class="viewcode-back" href="../../index.html#dagon.remote.RemoteTask">[docs]</a><span class="k">class</span> <span class="nc">RemoteTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteTask"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.RemoteTask">[docs]</a><span class="k">class</span> <span class="nc">RemoteTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Representates a task that is executed in a cloud instance, remote docker container,</span>
 <span class="sd">    remote server or remove cluster HPC**</span>
@@ -198,10 +205,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">keypath</span> <span class="o">=</span> <span class="n">abspath</span><span class="p">(</span><span class="n">keypath</span><span class="p">)</span> <span class="k">if</span> <span class="n">keypath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">keypath</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ssh_username</span> <span class="o">=</span> <span class="n">ssh_username</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1">#print name, self.ip, self.ssh_username</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssh_username</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span> <span class="o">=</span> <span class="n">SSHManager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ssh_username</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keypath</span><span class="p">)</span>
 
-<div class="viewcode-block" id="RemoteTask.add_public_key"><a class="viewcode-back" href="../../index.html#dagon.remote.RemoteTask.add_public_key">[docs]</a>    <span class="k">def</span> <span class="nf">add_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteTask.add_public_key"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.RemoteTask.add_public_key">[docs]</a>    <span class="k">def</span> <span class="nf">add_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a SSH public key on the remote machine</span>
 
@@ -215,7 +223,7 @@
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
-<div class="viewcode-block" id="RemoteTask.on_execute"><a class="viewcode-back" href="../../index.html#dagon.remote.RemoteTask.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteTask.on_execute"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.RemoteTask.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute an script on the remote machine</span>
 
@@ -231,7 +239,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span><span class="n">script_name</span><span class="p">,</span> <span class="n">script</span><span class="p">)</span></div>
 
     <span class="c1"># make dir</span>
-<div class="viewcode-block" id="RemoteTask.mkdir_working_dir"><a class="viewcode-back" href="../../index.html#dagon.remote.RemoteTask.mkdir_working_dir">[docs]</a>    <span class="k">def</span> <span class="nf">mkdir_working_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteTask.mkdir_working_dir"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.RemoteTask.mkdir_working_dir">[docs]</a>    <span class="k">def</span> <span class="nf">mkdir_working_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a directory on the remote machine</span>
 
@@ -240,20 +248,21 @@
 
 <span class="sd">        :raises Exception: a problem occurred while the creation of the directory</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">SSHManager</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="p">,</span> <span class="s2">&quot;mkdir -p &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot;/.dagon&quot;</span><span class="p">)</span>
+        <span class="c1">#print self.ssh_connection</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span> <span class="s2">&quot;mkdir -p &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot;/.dagon&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">workflow</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: Error creating scratch directory on server </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Cannot create scratch directory on remote&#39;</span><span class="p">)</span></div>
 
     <span class="c1"># remove scratch directory</span>
-<div class="viewcode-block" id="RemoteTask.on_garbage"><a class="viewcode-back" href="../../index.html#dagon.remote.RemoteTask.on_garbage">[docs]</a>    <span class="k">def</span> <span class="nf">on_garbage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteTask.on_garbage"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.RemoteTask.on_garbage">[docs]</a>    <span class="k">def</span> <span class="nf">on_garbage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove the scratch directory on the remote machine</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">SSHManager</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="p">,</span> <span class="s1">&#39;mv </span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span><span class="p">,</span>
-                                                                            <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot;-removed&quot;</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="s1">&#39;mv </span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot;-removed&quot;</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="RemoteTask.get_public_key"><a class="viewcode-back" href="../../index.html#dagon.remote.RemoteTask.get_public_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteTask.get_public_key"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.RemoteTask.get_public_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the temporal public key to this machine</span>
 
@@ -261,11 +270,11 @@
 <span class="sd">        :rtype: str with the public key</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;cat &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot;/.dagon/ssh_key.pub&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">SSHManager</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span></div></div>
 
 
-<div class="viewcode-block" id="CloudTask"><a class="viewcode-back" href="../../index.html#dagon.remote.CloudTask">[docs]</a><span class="k">class</span> <span class="nc">CloudTask</span><span class="p">(</span><span class="n">RemoteTask</span><span class="p">):</span>
+<div class="viewcode-block" id="CloudTask"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.CloudTask">[docs]</a><span class="k">class</span> <span class="nc">CloudTask</span><span class="p">(</span><span class="n">RemoteTask</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class that represents a task executed on a cloud instance</span>
 
@@ -325,7 +334,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">stop_instance</span> <span class="o">=</span> <span class="n">stop_instance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">instance_name</span> <span class="o">=</span> <span class="n">instance_name</span>
 
-<div class="viewcode-block" id="CloudTask.on_execute"><a class="viewcode-back" href="../../index.html#dagon.remote.CloudTask.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
+<div class="viewcode-block" id="CloudTask.on_execute"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.CloudTask.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute a script on the cloud instance</span>
 
@@ -342,7 +351,7 @@
         <span class="n">RemoteTask</span><span class="o">.</span><span class="n">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="s2">&quot;bash &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot;/.dagon/&quot;</span> <span class="o">+</span> <span class="n">script_name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CloudTask.execute"><a class="viewcode-back" href="../../index.html#dagon.remote.CloudTask.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CloudTask.execute"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.CloudTask.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute the task on the remote cloud instance.</span>
 
@@ -355,14 +364,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">instance_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_name</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">workflow</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> \
                                                                                        <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">CloudManager</span><span class="o">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">instance_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">,</span> <span class="n">keyparams</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">key_options</span><span class="p">,</span>
-                                             <span class="n">flavour</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_flavour</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">provider</span><span class="p">,</span>
-                                             <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">CloudManager</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="n">instance_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">,</span> <span class="n">keyparams</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">key_options</span><span class="p">,</span>
+                                              <span class="n">flavour</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_flavour</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">provider</span><span class="p">,</span>
+                                              <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">public_ips</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span> <span class="o">=</span> <span class="n">SSHManager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ssh_username</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keypath</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">CloudTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CloudTask.on_garbage"><a class="viewcode-back" href="../../index.html#dagon.remote.CloudTask.on_garbage">[docs]</a>    <span class="k">def</span> <span class="nf">on_garbage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CloudTask.on_garbage"><a class="viewcode-back" href="../../docs/dagon.html#dagon.remote.CloudTask.on_garbage">[docs]</a>    <span class="k">def</span> <span class="nf">on_garbage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Call the garbage collector</span>
 

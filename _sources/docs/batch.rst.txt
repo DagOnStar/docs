@@ -1,0 +1,8 @@
+Batch tasks
+==============
+
+.. autoclass:: dagon.batch.Batch
+   :members:
+
+.. autoclass:: dagon.batch.RemoteBatch
+   :members:

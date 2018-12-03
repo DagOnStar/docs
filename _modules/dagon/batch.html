@@ -77,8 +77,15 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stager.html">Stager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tasks_supported.html">Tasks supported</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other.html">Other</a></li>
+</ul>
+
             
           
         </div>
@@ -149,25 +156,24 @@
 <span class="kn">from</span> <span class="nn">dagon.remote</span> <span class="k">import</span> <span class="n">RemoteTask</span>
 
 
-<div class="viewcode-block" id="Batch"><a class="viewcode-back" href="../../index.html#dagon.batch.Batch">[docs]</a><span class="k">class</span> <span class="nc">Batch</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
-
+<div class="viewcode-block" id="Batch"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.Batch">[docs]</a><span class="k">class</span> <span class="nc">Batch</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Executes a Batch task**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">           :param name: task name</span>
-<span class="sd">           :type name: str</span>
+<span class="sd">        :param name: task name</span>
+<span class="sd">        :type name: str</span>
 
-<span class="sd">           :param command: command to be executed</span>
-<span class="sd">           :type command: str</span>
+<span class="sd">        :param command: command to be executed</span>
+<span class="sd">        :type command: str</span>
 
-<span class="sd">           :param working_dir: path to the task&#39;s working directory</span>
-<span class="sd">           :type working_dir: str</span>
+<span class="sd">        :param working_dir: path to the task&#39;s working directory</span>
+<span class="sd">        :type working_dir: str</span>
 
-<span class="sd">           :param endpoint: Globus endpoint ID</span>
-<span class="sd">           :type endpoint: str</span>
+<span class="sd">        :param endpoint: Globus endpoint ID</span>
+<span class="sd">        :type endpoint: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Task</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">working_dir</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span>
 
@@ -190,19 +196,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Batch</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Batch.as_json"><a class="viewcode-back" href="../../index.html#dagon.batch.Batch.as_json">[docs]</a>    <span class="k">def</span> <span class="nf">as_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generates a JSON representation of the task</span>
-
-<span class="sd">        :return: JSON representation of the task</span>
-<span class="sd">        :rtype: dict(str, object) with the execution output (str) and code (int)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">json_task</span> <span class="o">=</span> <span class="n">Task</span><span class="o">.</span><span class="n">as_json</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">json_task</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span>
-        <span class="k">return</span> <span class="n">json_task</span></div>
-
-<div class="viewcode-block" id="Batch.execute_command"><a class="viewcode-back" href="../../index.html#dagon.batch.Batch.execute_command">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Batch.execute_command"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.Batch.execute_command">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Executes a local command</span>
@@ -225,7 +219,7 @@
 
             <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">code</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="Batch.on_execute"><a class="viewcode-back" href="../../index.html#dagon.batch.Batch.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Batch.on_execute"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.Batch.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Invoke the script specified</span>
 
@@ -241,7 +235,7 @@
         <span class="k">return</span> <span class="n">Batch</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="s2">&quot;bash &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot;/.dagon/&quot;</span> <span class="o">+</span> <span class="n">script_name</span><span class="p">)</span></div>
 
     <span class="c1"># returns public key</span>
-<div class="viewcode-block" id="Batch.get_public_key"><a class="viewcode-back" href="../../index.html#dagon.batch.Batch.get_public_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Batch.get_public_key"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.Batch.get_public_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the temporal public key to this machine</span>
 
@@ -252,7 +246,7 @@
         <span class="n">result</span> <span class="o">=</span> <span class="n">Batch</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Batch.add_public_key"><a class="viewcode-back" href="../../index.html#dagon.batch.Batch.add_public_key">[docs]</a>    <span class="k">def</span> <span class="nf">add_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<div class="viewcode-block" id="Batch.add_public_key"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.Batch.add_public_key">[docs]</a>    <span class="k">def</span> <span class="nf">add_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a SSH public key on the remote machine</span>
 
@@ -266,7 +260,7 @@
         <span class="k">return</span> <span class="n">result</span></div></div>
 
 
-<div class="viewcode-block" id="RemoteBatch"><a class="viewcode-back" href="../../index.html#dagon.batch.RemoteBatch">[docs]</a><span class="k">class</span> <span class="nc">RemoteBatch</span><span class="p">(</span><span class="n">RemoteTask</span><span class="p">,</span> <span class="n">Batch</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteBatch"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.RemoteBatch">[docs]</a><span class="k">class</span> <span class="nc">RemoteBatch</span><span class="p">(</span><span class="n">RemoteTask</span><span class="p">,</span> <span class="n">Batch</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Execute a Batch task on a remote machine**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -294,9 +288,10 @@
 <span class="sd">        :param endpoint: Globus endpoint ID</span>
 <span class="sd">        :type endpoint: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">RemoteTask</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ssh_username</span><span class="p">,</span> <span class="n">keypath</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">RemoteTask</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ssh_username</span><span class="p">,</span> <span class="n">keypath</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="n">working_dir</span><span class="p">,</span>
+                            <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span>
 
-<div class="viewcode-block" id="RemoteBatch.on_execute"><a class="viewcode-back" href="../../index.html#dagon.batch.RemoteBatch.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">launcher_script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteBatch.on_execute"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.RemoteBatch.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">launcher_script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute a script on the remote machine</span>
 
@@ -315,7 +310,7 @@
         <span class="k">return</span> <span class="n">result</span></div></div>
 
 
-<div class="viewcode-block" id="Slurm"><a class="viewcode-back" href="../../index.html#dagon.batch.Slurm">[docs]</a><span class="k">class</span> <span class="nc">Slurm</span><span class="p">(</span><span class="n">Batch</span><span class="p">):</span>
+<div class="viewcode-block" id="Slurm"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.Slurm">[docs]</a><span class="k">class</span> <span class="nc">Slurm</span><span class="p">(</span><span class="n">Batch</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Run a task using Slurm**</span>
 
@@ -368,7 +363,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Slurm</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Slurm.generate_command"><a class="viewcode-back" href="../../index.html#dagon.batch.Slurm.generate_command">[docs]</a>    <span class="k">def</span> <span class="nf">generate_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Slurm.generate_command"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.Slurm.generate_command">[docs]</a>    <span class="k">def</span> <span class="nf">generate_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates the Slurm command including the partition and number of task parameters</span>
@@ -394,7 +389,7 @@
                   <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot; -W &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_dir</span> <span class="o">+</span> <span class="s2">&quot;/.dagon/&quot;</span> <span class="o">+</span> <span class="n">script_name</span>
         <span class="k">return</span> <span class="n">command</span></div>
 
-<div class="viewcode-block" id="Slurm.on_execute"><a class="viewcode-back" href="../../index.html#dagon.batch.Slurm.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Slurm.on_execute"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.Slurm.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute a script using slurm</span>
@@ -421,14 +416,13 @@
         <span class="k">return</span> <span class="n">result</span></div></div>
 
 
-<div class="viewcode-block" id="RemoteSlurm"><a class="viewcode-back" href="../../index.html#dagon.batch.RemoteSlurm">[docs]</a><span class="k">class</span> <span class="nc">RemoteSlurm</span><span class="p">(</span><span class="n">RemoteTask</span><span class="p">,</span> <span class="n">Slurm</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteSlurm"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.RemoteSlurm">[docs]</a><span class="k">class</span> <span class="nc">RemoteSlurm</span><span class="p">(</span><span class="n">RemoteTask</span><span class="p">,</span> <span class="n">Slurm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    ** Represent a task that runs on a remote slurm deployment **</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ntasks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ssh_username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">ip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param name: name of the task</span>
 <span class="sd">        :type name: str</span>
@@ -458,10 +452,11 @@
 <span class="sd">        :type ip: str</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Slurm</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="n">partition</span><span class="p">,</span> <span class="n">ntasks</span><span class="o">=</span><span class="n">ntasks</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">Slurm</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">working_dir</span><span class="o">=</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="n">partition</span><span class="p">,</span> <span class="n">ntasks</span><span class="o">=</span><span class="n">ntasks</span><span class="p">,</span>
+                       <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span>
         <span class="n">RemoteTask</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ssh_username</span><span class="p">,</span> <span class="n">keypath</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">working_dir</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-<div class="viewcode-block" id="RemoteSlurm.on_execute"><a class="viewcode-back" href="../../index.html#dagon.batch.RemoteSlurm.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">launcher_script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
+<div class="viewcode-block" id="RemoteSlurm.on_execute"><a class="viewcode-back" href="../../docs/dagon.html#dagon.batch.RemoteSlurm.on_execute">[docs]</a>    <span class="k">def</span> <span class="nf">on_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">launcher_script</span><span class="p">,</span> <span class="n">script_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute a script using slurm</span>
 

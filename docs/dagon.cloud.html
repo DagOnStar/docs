@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dagon.cloud package &mdash; DagOn* 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="dagon.communication package" href="dagon.communication.html" />
+    <link rel="prev" title="dagon.api package" href="dagon.api.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> DagOn*
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stager.html">Stager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tasks_supported.html">Tasks supported</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dagon.html">dagon package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dagon.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dagon.api.html">dagon.api package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">dagon.cloud package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dagon.communication.html">dagon.communication package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dagon.dockercontainer.html">dagon.dockercontainer package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dagon.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dagon.html#module-dagon">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../other.html">Other</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DagOn*</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Modules documentation</a> &raquo;</li>
+        
+          <li><a href="dagon.html">dagon package</a> &raquo;</li>
+        
+      <li>dagon.cloud package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/docs/dagon.cloud.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dagon-cloud-package">
+<h1>dagon.cloud package<a class="headerlink" href="#dagon-cloud-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-dagon.cloud">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dagon.cloud" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dagon.cloud.CloudManager">
+<em class="property">class </em><code class="descclassname">dagon.cloud.</code><code class="descname">CloudManager</code><a class="reference internal" href="../_modules/dagon/cloud.html#CloudManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.CloudManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manages the connection with the cloud providers using LibCloud</p>
+<dl class="staticmethod">
+<dt id="dagon.cloud.CloudManager.create_instance">
+<em class="property">static </em><code class="descname">create_instance</code><span class="sig-paren">(</span><em>conn</em>, <em>name</em>, <em>flavour</em>, <em>keyparams</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#CloudManager.create_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.CloudManager.create_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a new instance on the cloud provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>name</strong> – instance name</li>
+<li><strong>name</strong> – str</li>
+<li><strong>flavour</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – dictionary with the instance configuration (size, region, operating system)</li>
+<li><strong>keyparams</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>)</em>) – dictionary with the ssh key</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">instance created</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rtype node:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.base.Node</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dagon.cloud.CloudManager.get_existing_instance">
+<em class="property">static </em><code class="descname">get_existing_instance</code><span class="sig-paren">(</span><em>conn</em>, <em>id=None</em>, <em>name=None</em>, <em>uuid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#CloudManager.get_existing_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.CloudManager.get_existing_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>return an existing instance from the cloud provider. The id, name or uuid is used to get the instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – instance id</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – instance name</li>
+<li><strong>uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – instance uuid</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">instance</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rtype node:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.base.Node</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dagon.cloud.CloudManager.get_instance">
+<em class="property">static </em><code class="descname">get_instance</code><span class="sig-paren">(</span><em>keyparams</em>, <em>provider</em>, <em>name=None</em>, <em>flavour=None</em>, <em>instance_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#CloudManager.get_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.CloudManager.get_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or create an instance in the specified cloud provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>keyparams</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>)</em>) – dictionary with the ssh key</li>
+<li><strong>provider</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.types.Provider</span></code>) – cloud provider</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – instance name (for existing instances)</li>
+<li><strong>flavour</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – dictionary with the instance configuration (size, region, operating system)</li>
+<li><strong>instance_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – instance id in the cloud provider (for existing instances)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">instance created</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.base.Node</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dagon.cloud.CloudManager.wait_until_running">
+<em class="property">static </em><code class="descname">wait_until_running</code><span class="sig-paren">(</span><em>conn</em>, <em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#CloudManager.wait_until_running"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.CloudManager.wait_until_running" title="Permalink to this definition">¶</a></dt>
+<dd><p>wait until an instance is running</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>node</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.base.Node</span></code>) – node to waite</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">instance updated</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rtype node:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.base.Node</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dagon.cloud.DIGITALOCEAN">
+<em class="property">class </em><code class="descclassname">dagon.cloud.</code><code class="descname">DIGITALOCEAN</code><a class="reference internal" href="../_modules/dagon/cloud.html#DIGITALOCEAN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.DIGITALOCEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manages the creation of instances on DigitalOcean using libcloud</p>
+<dl class="staticmethod">
+<dt id="dagon.cloud.DIGITALOCEAN.createInstance">
+<em class="property">static </em><code class="descname">createInstance</code><span class="sig-paren">(</span><em>conn</em>, <em>name</em>, <em>flavour</em>, <em>keyparams</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#DIGITALOCEAN.createInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.DIGITALOCEAN.createInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a new instance on DigitalOcean</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>DigitalOcean Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>name</strong> – instance name</li>
+<li><strong>name</strong> – str</li>
+<li><strong>flavour</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – dictionary with the instance configuration (size, region, operating system)</li>
+<li><strong>keyparams</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>)</em>) – dictionary with the ssh key</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">instance created</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rtype node:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.base.Node</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dagon.cloud.EC2">
+<em class="property">class </em><code class="descclassname">dagon.cloud.</code><code class="descname">EC2</code><a class="reference internal" href="../_modules/dagon/cloud.html#EC2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.EC2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manages the creation of instances on Amazon EC2 using libcloud</p>
+<dl class="staticmethod">
+<dt id="dagon.cloud.EC2.createInstance">
+<em class="property">static </em><code class="descname">createInstance</code><span class="sig-paren">(</span><em>conn</em>, <em>name</em>, <em>flavour</em>, <em>keyparams</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#EC2.createInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.EC2.createInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a new instance on amazon EC2</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>EC2 Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>name</strong> – instance name</li>
+<li><strong>name</strong> – str</li>
+<li><strong>flavour</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – dictionary with the instance configuration (size, region, operating system)</li>
+<li><strong>keyparams</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>)</em>) – dictionary with the ssh key</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">instance created</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rtype node:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.base.Node</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dagon.cloud.GCE">
+<em class="property">class </em><code class="descclassname">dagon.cloud.</code><code class="descname">GCE</code><a class="reference internal" href="../_modules/dagon/cloud.html#GCE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.GCE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manages the creation of instances on google cloud using libcloud</p>
+<dl class="staticmethod">
+<dt id="dagon.cloud.GCE.createInstance">
+<em class="property">static </em><code class="descname">createInstance</code><span class="sig-paren">(</span><em>conn</em>, <em>name</em>, <em>flavour</em>, <em>keyparams</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#GCE.createInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.GCE.createInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a new instance on google cloud</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>google cloud Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>name</strong> – instance name</li>
+<li><strong>name</strong> – str</li>
+<li><strong>flavour</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – dictionary with the instance configuration (size, region, operating system)</li>
+<li><strong>keyparams</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>)</em>) – dictionary with the ssh key</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">instance created</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rtype node:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcloud.compute.base.Node</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dagon.cloud.KeyOptions">
+<em class="property">class </em><code class="descclassname">dagon.cloud.</code><code class="descname">KeyOptions</code><a class="reference internal" href="../_modules/dagon/cloud.html#KeyOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.KeyOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Represents the different options to manage the keys instance. The key could be create from the scratch,
+import an existing local key or get an existing key on the cloud provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="#dagon.cloud.KeyOptions.CREATE" title="dagon.cloud.KeyOptions.CREATE"><strong>CREATE</strong></a> – create a new key</li>
+<li><a class="reference internal" href="#dagon.cloud.KeyOptions.IMPORT" title="dagon.cloud.KeyOptions.IMPORT"><strong>IMPORT</strong></a> – import a key</li>
+<li><a class="reference internal" href="#dagon.cloud.KeyOptions.GET" title="dagon.cloud.KeyOptions.GET"><strong>GET</strong></a> – get an existing key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="dagon.cloud.KeyOptions.CREATE">
+<code class="descname">CREATE</code><em class="property"> = 'CREATE'</em><a class="headerlink" href="#dagon.cloud.KeyOptions.CREATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dagon.cloud.KeyOptions.GET">
+<code class="descname">GET</code><em class="property"> = 'GET'</em><a class="headerlink" href="#dagon.cloud.KeyOptions.GET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dagon.cloud.KeyOptions.IMPORT">
+<code class="descname">IMPORT</code><em class="property"> = 'IMPORT'</em><a class="headerlink" href="#dagon.cloud.KeyOptions.IMPORT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dagon.cloud.KeyPair">
+<em class="property">class </em><code class="descclassname">dagon.cloud.</code><code class="descname">KeyPair</code><a class="reference internal" href="../_modules/dagon/cloud.html#KeyPair"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.KeyPair" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="staticmethod">
+<dt id="dagon.cloud.KeyPair.createPairKey">
+<em class="property">static </em><code class="descname">createPairKey</code><span class="sig-paren">(</span><em>conn</em>, <em>filename</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#KeyPair.createPairKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.KeyPair.createPairKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a new key on the cloud provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path to the file where the key will be saved</li>
+<li><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>(</em><em>)</em>) – arguments to create the key</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">key pair object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dagon.cloud.KeyPair.generate_RSA">
+<em class="property">static </em><code class="descname">generate_RSA</code><span class="sig-paren">(</span><em>bits=2048</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#KeyPair.generate_RSA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.KeyPair.generate_RSA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an RSA keypair with an exponent of 65537 in PEM format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bits</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – bits The key length in bits</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Return private key and public key</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dagon.cloud.KeyPair.getExistingPairKey">
+<em class="property">static </em><code class="descname">getExistingPairKey</code><span class="sig-paren">(</span><em>conn</em>, <em>keyname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#KeyPair.getExistingPairKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.KeyPair.getExistingPairKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns an existing pair key from the cloud provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>keyname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – name of the key on the cloud provider</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">key pair object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dagon.cloud.KeyPair.importKey">
+<em class="property">static </em><code class="descname">importKey</code><span class="sig-paren">(</span><em>conn</em>, <em>key_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#KeyPair.importKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.KeyPair.importKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>import an existing key from a local file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>conn</strong> (<em>Libcloud driver</em>) – driver to the cloud provider</li>
+<li><strong>key_path</strong> – path to the key</li>
+<li><strong>key_path</strong> – str</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">key pair object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dagon.cloud.KeyPair.writeKey">
+<em class="property">static </em><code class="descname">writeKey</code><span class="sig-paren">(</span><em>privateKey</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/cloud.html#KeyPair.writeKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.cloud.KeyPair.writeKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>writes the private key in a file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>privateKey</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – key string</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path to the file where the key will be saved</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dagon.communication.html" class="btn btn-neutral float-right" title="dagon.communication package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dagon.api.html" class="btn btn-neutral" title="dagon.api package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Raffaele Montella
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

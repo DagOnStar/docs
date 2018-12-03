@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dagon.dockercontainer package &mdash; DagOn* 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Other" href="../other.html" />
+    <link rel="prev" title="dagon.communication package" href="dagon.communication.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> DagOn*
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stager.html">Stager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tasks_supported.html">Tasks supported</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dagon.html">dagon package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dagon.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dagon.api.html">dagon.api package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dagon.cloud.html">dagon.cloud package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dagon.communication.html">dagon.communication package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">dagon.dockercontainer package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dagon.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dagon.html#module-dagon">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../other.html">Other</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DagOn*</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Modules documentation</a> &raquo;</li>
+        
+          <li><a href="dagon.html">dagon package</a> &raquo;</li>
+        
+      <li>dagon.dockercontainer package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/docs/dagon.dockercontainer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dagon-dockercontainer-package">
+<h1>dagon.dockercontainer package<a class="headerlink" href="#dagon-dockercontainer-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-dagon.dockercontainer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dagon.dockercontainer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dagon.dockercontainer.Container">
+<em class="property">class </em><code class="descclassname">dagon.dockercontainer.</code><code class="descname">Container</code><span class="sig-paren">(</span><em>key</em>, <em>client</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#Container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.Container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p><strong>Represents a docker container</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – docker container key</li>
+<li><strong>client</strong> (<a class="reference internal" href="#dagon.dockercontainer.DockerClient" title="dagon.dockercontainer.DockerClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">DockerClient</span></code></a>) – docker client</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="dagon.dockercontainer.Container.exec_in_cont">
+<code class="descname">exec_in_cont</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#Container.exec_in_cont"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.Container.exec_in_cont" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an string with the command to execute something on the container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – command to execute</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">container command</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dagon.dockercontainer.Container.logs">
+<code class="descname">logs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#Container.logs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.Container.logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the logs from the container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">container logs</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dagon.dockercontainer.Container.rm">
+<code class="descname">rm</code><span class="sig-paren">(</span><em>force=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#Container.rm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.Container.rm" title="Permalink to this definition">¶</a></dt>
+<dd><p>removes a docker container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>force</strong> – force to remove a container in execution</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rtype force:</th><td class="field-body">bool</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the container has been removed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dagon.dockercontainer.Container.stop">
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#Container.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.Container.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>stops a container in execution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the container has been stopped</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dagon.dockercontainer.DockerClient">
+<em class="property">class </em><code class="descclassname">dagon.dockercontainer.</code><code class="descname">DockerClient</code><a class="reference internal" href="../_modules/dagon/dockercontainer.html#DockerClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.DockerClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manages the communication with a docker container</p>
+<dl class="method">
+<dt id="dagon.dockercontainer.DockerClient.exec_command">
+<code class="descname">exec_command</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#DockerClient.exec_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.DockerClient.exec_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>executes a command on a container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – command to be executed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">execution results</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dagon.dockercontainer.DockerClient.form_string_cont_creation">
+<em class="property">static </em><code class="descname">form_string_cont_creation</code><span class="sig-paren">(</span><em>image</em>, <em>command=None</em>, <em>volume=None</em>, <em>ports=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#DockerClient.form_string_cont_creation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.DockerClient.form_string_cont_creation" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates an string to create the container on the remote machine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – image of the container</li>
+<li><strong>command</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – command to be executed</li>
+<li><strong>volume</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>) </em><em>=&gt; {&quot;host&quot;:&quot;host_path&quot;</em><em>, </em><em>&quot;container&quot;:&quot;container_path&quot;}</em>) – shared volume with the host system</li>
+<li><strong>ports</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>) </em><em>=&gt; {&quot;host&quot;:&quot;host_port&quot;</em><em>, </em><em>&quot;container&quot;:&quot;container_port&quot;}</em>) – ports expose with the host system</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">string with the command to create the container</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dagon.dockercontainer.DockerRemoteClient">
+<em class="property">class </em><code class="descclassname">dagon.dockercontainer.</code><code class="descname">DockerRemoteClient</code><span class="sig-paren">(</span><em>ssh</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#DockerRemoteClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.DockerRemoteClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dagon.dockercontainer.DockerClient" title="dagon.dockercontainer.DockerClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">dagon.dockercontainer.DockerClient</span></code></a></p>
+<p>Manages the execution of command on remote containers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ssh</strong> – ssh connection with remote host</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="dagon.dockercontainer.DockerRemoteClient.exec_command">
+<code class="descname">exec_command</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/dockercontainer.html#DockerRemoteClient.exec_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.dockercontainer.DockerRemoteClient.exec_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>executes a command on remote container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – command to execute on the remote machine</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">execution results</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../other.html" class="btn btn-neutral float-right" title="Other" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dagon.communication.html" class="btn btn-neutral" title="dagon.communication package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Raffaele Montella
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

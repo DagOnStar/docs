@@ -1,0 +1,11 @@
+<map id="inheritancee903693b0d" name="inheritancee903693b0d">
+<area shape="rect" id="node1" title="**Executes a Batch task**" alt="" coords="256,129,328,155"/>
+<area shape="rect" id="node8" title="**Run a task using Slurm**" alt="" coords="391,177,463,203"/>
+<area shape="rect" id="node2" title="**Represents a task executed by DagOn**" alt="" coords="136,104,208,129"/>
+<area shape="rect" id="node4" title="**Representates a task that is executed in a cloud instance, remote docker container," alt="" coords="376,79,477,104"/>
+<area shape="rect" id="node3" title="Class that represents a task executed on a cloud instance" alt="" coords="555,79,643,104"/>
+<area shape="rect" id="node7" title="** Represent a task that runs on a remote slurm deployment **" alt="" coords="543,177,654,203"/>
+<area shape="rect" id="node9" title="Choose the transference protocol to move data between tasks" alt="" coords="11,55,83,80"/>
+<area shape="rect" id="node10" title="A class that represents a thread of control." alt="" coords="11,104,83,129"/>
+<area shape="rect" id="node11" href="workflow.html#dagon.Workflow" target="_top" title="**Represents a workflow executed by DagOn**" alt="" coords="5,5,88,31"/>
+</map>

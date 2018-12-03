@@ -77,8 +77,15 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stager.html">Stager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tasks_supported.html">Tasks supported</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other.html">Other</a></li>
+</ul>
+
             
           
         </div>
@@ -155,13 +162,12 @@
 <span class="kn">from</span> <span class="nn">dagon.api.server</span> <span class="k">import</span> <span class="n">WorkflowServer</span>
 <span class="kn">from</span> <span class="nn">dagon.batch</span> <span class="k">import</span> <span class="n">Batch</span>
 <span class="kn">from</span> <span class="nn">dagon.batch</span> <span class="k">import</span> <span class="n">Slurm</span>
-<span class="kn">from</span> <span class="nn">dagon.communication.connection</span> <span class="k">import</span> <span class="n">Connection</span>
 <span class="kn">from</span> <span class="nn">dagon.communication.data_transfer</span> <span class="k">import</span> <span class="n">GlobusManager</span>
 <span class="kn">from</span> <span class="nn">dagon.docker_task</span> <span class="k">import</span> <span class="n">DockerRemoteTask</span>
 <span class="kn">from</span> <span class="nn">dagon.remote</span> <span class="k">import</span> <span class="n">RemoteTask</span>
 
 
-<span class="k">class</span> <span class="nc">Status</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="Status"><a class="viewcode-back" href="../docs/dagon.html#dagon.Status">[docs]</a><span class="k">class</span> <span class="nc">Status</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Possible states that a :class:`dagon.Task` could be in</span>
 
@@ -176,10 +182,10 @@
     <span class="n">WAITING</span> <span class="o">=</span> <span class="s2">&quot;WAITING&quot;</span>
     <span class="n">RUNNING</span> <span class="o">=</span> <span class="s2">&quot;RUNNING&quot;</span>
     <span class="n">FINISHED</span> <span class="o">=</span> <span class="s2">&quot;FINISHED&quot;</span>
-    <span class="n">FAILED</span> <span class="o">=</span> <span class="s2">&quot;FAILED&quot;</span>
+    <span class="n">FAILED</span> <span class="o">=</span> <span class="s2">&quot;FAILED&quot;</span></div>
 
 
-<div class="viewcode-block" id="Workflow"><a class="viewcode-back" href="../index.html#dagon.Workflow">[docs]</a><span class="k">class</span> <span class="nc">Workflow</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Workflow"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow">[docs]</a><span class="k">class</span> <span class="nc">Workflow</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Represents a workflow executed by DagOn**</span>
 
@@ -251,26 +257,13 @@
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-        <span class="sd">&quot;&quot;&quot;port = Connection.find_port()</span>
-<span class="sd">        config_ip = None</span>
-<span class="sd">        if &quot;dagon_ip&quot; in self.cfg and &quot;ip&quot; in self.cfg[&#39;dagon_ip&#39;]:</span>
-<span class="sd">            config_ip = self.cfg[&#39;dagon_ip&#39;][&#39;ip&#39;]</span>
-<span class="sd">        ip = Connection.find_ip_local(config_ip)</span>
+<div class="viewcode-block" id="Workflow.get_dry"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow.get_dry">[docs]</a>    <span class="k">def</span> <span class="nf">get_dry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dry</span></div>
 
-<span class="sd">        self.workflow_server = WorkflowServer(self, ip, port)</span>
-<span class="sd">        self.workflow_server.start()  # start workflow server</span>
-<span class="sd">        self.url = &quot;%s:%d&quot; % (Connection.find_ip_public(), port)</span>
-<span class="sd">        if not Connection.check_url(self.url):</span>
-<span class="sd">            self.url = &quot;%s:%d&quot; % (ip, port)</span>
-<span class="sd">        self.logger.debug(&quot;Workflow server URL %s&quot;, self.url)&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Workflow.set_dry"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow.set_dry">[docs]</a>    <span class="k">def</span> <span class="nf">set_dry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dry</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dry</span> <span class="o">=</span> <span class="n">dry</span></div>
 
-    <span class="k">def</span> <span class="nf">get_dry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dry</span>
-
-    <span class="k">def</span> <span class="nf">set_dry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dry</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dry</span> <span class="o">=</span> <span class="n">dry</span>
-
-<div class="viewcode-block" id="Workflow.get_scratch_dir_base"><a class="viewcode-back" href="../index.html#dagon.Workflow.get_scratch_dir_base">[docs]</a>    <span class="k">def</span> <span class="nf">get_scratch_dir_base</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Workflow.get_scratch_dir_base"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow.get_scratch_dir_base">[docs]</a>    <span class="k">def</span> <span class="nf">get_scratch_dir_base</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the path to the base scratch directory</span>
 
@@ -279,7 +272,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;batch&#39;</span><span class="p">][</span><span class="s1">&#39;scratch_dir_base&#39;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Workflow.find_task_by_name"><a class="viewcode-back" href="../index.html#dagon.Workflow.find_task_by_name">[docs]</a>    <span class="k">def</span> <span class="nf">find_task_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow_name</span><span class="p">,</span> <span class="n">task_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Workflow.find_task_by_name"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow.find_task_by_name">[docs]</a>    <span class="k">def</span> <span class="nf">find_task_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow_name</span><span class="p">,</span> <span class="n">task_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Search for a task of an specific workflow</span>
 
@@ -306,7 +299,7 @@
 
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="Workflow.add_task"><a class="viewcode-back" href="../index.html#dagon.Workflow.add_task">[docs]</a>    <span class="k">def</span> <span class="nf">add_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+<div class="viewcode-block" id="Workflow.add_task"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow.add_task">[docs]</a>    <span class="k">def</span> <span class="nf">add_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a task to this workflow</span>
 
@@ -318,7 +311,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_api_available</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Workflow.make_dependencies"><a class="viewcode-back" href="../index.html#dagon.Workflow.make_dependencies">[docs]</a>    <span class="k">def</span> <span class="nf">make_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Workflow.make_dependencies"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow.make_dependencies">[docs]</a>    <span class="k">def</span> <span class="nf">make_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Looks for all the dependencies between tasks</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -335,7 +328,7 @@
             <span class="n">task</span><span class="o">.</span><span class="n">pre_run</span><span class="p">()</span></div>
 
     <span class="c1"># Return a json representation of the workflow</span>
-<div class="viewcode-block" id="Workflow.as_json"><a class="viewcode-back" href="../index.html#dagon.Workflow.as_json">[docs]</a>    <span class="k">def</span> <span class="nf">as_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Workflow.as_json"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow.as_json">[docs]</a>    <span class="k">def</span> <span class="nf">as_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a json representation of the workflow</span>
 
@@ -348,16 +341,16 @@
             <span class="n">jsonWorkflow</span><span class="p">[</span><span class="s1">&#39;tasks&#39;</span><span class="p">][</span><span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">jsonWorkflow</span></div>
 
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Workflow.run"><a class="viewcode-back" href="../docs/dagon.html#dagon.Workflow.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Running workflow: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
             <span class="n">task</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
-            <span class="n">task</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
+            <span class="n">task</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div></div>
 
 
-<div class="viewcode-block" id="DataMover"><a class="viewcode-back" href="../index.html#dagon.DataMover">[docs]</a><span class="k">class</span> <span class="nc">DataMover</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="DataMover"><a class="viewcode-back" href="../docs/dagon.html#dagon.DataMover">[docs]</a><span class="k">class</span> <span class="nc">DataMover</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Possible transfer protocols/apps</span>
 
@@ -383,7 +376,7 @@
     <span class="n">GRIDFTP</span> <span class="o">=</span> <span class="mi">8</span></div>
 
 
-<div class="viewcode-block" id="ProtocolStatus"><a class="viewcode-back" href="../index.html#dagon.ProtocolStatus">[docs]</a><span class="k">class</span> <span class="nc">ProtocolStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtocolStatus"><a class="viewcode-back" href="../docs/dagon.html#dagon.ProtocolStatus">[docs]</a><span class="k">class</span> <span class="nc">ProtocolStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Status of the protocol on a machine</span>
 
@@ -397,7 +390,7 @@
     <span class="n">INACTIVE</span> <span class="o">=</span> <span class="s2">&quot;inactive&quot;</span></div>
 
 
-<div class="viewcode-block" id="Stager"><a class="viewcode-back" href="../index.html#dagon.Stager">[docs]</a><span class="k">class</span> <span class="nc">Stager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Stager"><a class="viewcode-back" href="../docs/dagon.html#dagon.Stager">[docs]</a><span class="k">class</span> <span class="nc">Stager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Choose the transference protocol to move data between tasks</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -405,7 +398,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
 
-<div class="viewcode-block" id="Stager.stage_in"><a class="viewcode-back" href="../index.html#dagon.Stager.stage_in">[docs]</a>    <span class="k">def</span> <span class="nf">stage_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dst_task</span><span class="p">,</span> <span class="n">src_task</span><span class="p">,</span> <span class="n">dst_path</span><span class="p">,</span> <span class="n">local_path</span><span class="p">):</span>
+<div class="viewcode-block" id="Stager.stage_in"><a class="viewcode-back" href="../docs/dagon.html#dagon.Stager.stage_in">[docs]</a>    <span class="k">def</span> <span class="nf">stage_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dst_task</span><span class="p">,</span> <span class="n">src_task</span><span class="p">,</span> <span class="n">dst_path</span><span class="p">,</span> <span class="n">local_path</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluates the context of the machines and choose the transfer protocol</span>
 

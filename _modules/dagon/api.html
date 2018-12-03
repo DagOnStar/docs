@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dagon.api &mdash; DagOn* 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> DagOn*
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stager.html">Stager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tasks_supported.html">Tasks supported</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other.html">Other</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DagOn*</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../dagon.html">dagon</a> &raquo;</li>
+        
+      <li>dagon.api</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dagon.api</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.exceptions</span> <span class="k">import</span> <span class="ne">ConnectionError</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.exceptions</span> <span class="k">import</span> <span class="n">MissingSchema</span>
+
+
+<span class="c1"># Perform the communication with the dagon service</span>
+<div class="viewcode-block" id="API"><a class="viewcode-back" href="../../docs/dagon.api.html#dagon.api.API">[docs]</a><span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkConnection</span><span class="p">()</span>
+
+    <span class="c1"># check if the service URL is valid or a service is available</span>
+<div class="viewcode-block" id="API.checkConnection"><a class="viewcode-back" href="../../docs/dagon.api.html#dagon.api.API.checkConnection">[docs]</a>    <span class="k">def</span> <span class="nf">checkConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if the service URL is valid or a service is available</span>
+
+<span class="sd">        :raises ConnectionError: when it&#39;s not possible to connect to the URL provided</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">requests</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ConnectionError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;It is not possible connect to the URL </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">MissingSchema</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Bad URL </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">)</span></div>
+
+    <span class="c1"># create workflow on dagon service</span>
+<div class="viewcode-block" id="API.create_workflow"><a class="viewcode-back" href="../../docs/dagon.api.html#dagon.api.API.create_workflow">[docs]</a>    <span class="k">def</span> <span class="nf">create_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create workflow on dagon service</span>
+
+<span class="sd">        :param workflow: :class:`dagon.Workflow` object to save</span>
+<span class="sd">        :type workflow: :class:`dagon.Workflow`</span>
+
+<span class="sd">        :return: workflow id</span>
+<span class="sd">        :rtype: int</span>
+
+<span class="sd">        :raises Exception: when there is an error with the registration or the workflow name already exists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="s2">&quot;/create&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">service</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>  <span class="c1"># created</span>
+            <span class="n">json_reponse</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">json_reponse</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">409</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Workflow name already exists </span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Workflow error registration </span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span></div>
+
+    <span class="c1"># add task to workflow</span>
+<div class="viewcode-block" id="API.add_task"><a class="viewcode-back" href="../../docs/dagon.api.html#dagon.api.API.add_task">[docs]</a>    <span class="k">def</span> <span class="nf">add_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add task to workflow</span>
+
+<span class="sd">        :param workflow_id: workflow id of the tasks</span>
+<span class="sd">        :type workflow_id: int</span>
+
+<span class="sd">        :param task: task to add to the workflow</span>
+<span class="sd">        :type task: :class:`dagon.task.Task`</span>
+
+<span class="sd">        :raises Exception: when there is an error with the call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="s2">&quot;/add_task/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">workflow_id</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">service</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">201</span> <span class="ow">and</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>  <span class="c1"># error</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Something went wrong </span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span></div>
+
+    <span class="c1"># update a task status in the server</span>
+<div class="viewcode-block" id="API.update_task_status"><a class="viewcode-back" href="../../docs/dagon.api.html#dagon.api.API.update_task_status">[docs]</a>    <span class="k">def</span> <span class="nf">update_task_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        update a task status in the server</span>
+
+<span class="sd">        :param workflow_id: workflow id of the tasks</span>
+<span class="sd">        :type workflow_id: int</span>
+
+<span class="sd">        :param task: name of the task</span>
+<span class="sd">        :type task: str</span>
+
+<span class="sd">        :param status: task status</span>
+<span class="sd">        :type status: str</span>
+
+<span class="sd">        :raises Exception: when there is an error with the call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="s2">&quot;/changestatus/</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">service</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">201</span> <span class="ow">and</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>  <span class="c1"># error</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Something went wrong </span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span></div>
+
+    <span class="c1"># get a task from the server</span>
+<div class="viewcode-block" id="API.get_task"><a class="viewcode-back" href="../../docs/dagon.api.html#dagon.api.API.get_task">[docs]</a>    <span class="k">def</span> <span class="nf">get_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get a task from the server</span>
+
+<span class="sd">        :param workflow_id: workflow id of the tasks</span>
+<span class="sd">        :type workflow_id: int</span>
+
+<span class="sd">        :param task: name of the task</span>
+<span class="sd">        :type task: str</span>
+
+<span class="sd">        :return: task</span>
+<span class="sd">        :rtype: :class:`dagon.task.Task`</span>
+
+<span class="sd">        :raises Exception: when there is an error with the call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">service</span> <span class="o">=</span> <span class="s2">&quot;/update/</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">service</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">201</span> <span class="ow">and</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>  <span class="c1"># error</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Something went wrong </span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">task</span></div>
+
+    <span class="c1"># update atribute of the task</span>
+<div class="viewcode-block" id="API.update_task"><a class="viewcode-back" href="../../docs/dagon.api.html#dagon.api.API.update_task">[docs]</a>    <span class="k">def</span> <span class="nf">update_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        update attribute of the task</span>
+
+<span class="sd">        :param workflow_id: workflow id of the tasks</span>
+<span class="sd">        :type workflow_id: int</span>
+
+<span class="sd">        :param task: name of the task</span>
+<span class="sd">        :type task: str</span>
+
+<span class="sd">        :param attribute: attribute of the task to update</span>
+<span class="sd">        :type task: str</span>
+
+<span class="sd">        :param value: value of the attribute</span>
+<span class="sd">        :type task: str</span>
+
+<span class="sd">        :raises Exception: when there is an error with the call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">service</span> <span class="o">=</span> <span class="s2">&quot;/update/</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">?value=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">service</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">201</span> <span class="ow">and</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>  <span class="c1"># error</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Something went wrong </span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span></div>
+
+    <span class="c1"># add dependency on task</span>
+<div class="viewcode-block" id="API.add_dependency"><a class="viewcode-back" href="../../docs/dagon.api.html#dagon.api.API.add_dependency">[docs]</a>    <span class="k">def</span> <span class="nf">add_dependency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">dependency</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add a dependency to an existing task in a workflow</span>
+
+<span class="sd">        :param workflow_id: workflow id of the tasks</span>
+<span class="sd">        :type workflow_id: int</span>
+
+<span class="sd">        :param task: name of the task</span>
+<span class="sd">        :type task: str</span>
+
+<span class="sd">        :param dependency: name of the dependency</span>
+<span class="sd">        :type task: str</span>
+
+<span class="sd">        :raises Exception: when there is an error with the call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="s2">&quot;/</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">/dependency/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">dependency</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">service</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">201</span> <span class="ow">and</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>  <span class="c1"># error</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Something went wrong </span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Raffaele Montella
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

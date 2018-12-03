@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dagon.communication package &mdash; DagOn* 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="dagon.dockercontainer package" href="dagon.dockercontainer.html" />
+    <link rel="prev" title="dagon.cloud package" href="dagon.cloud.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> DagOn*
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting starting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stager.html">Stager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tasks_supported.html">Tasks supported</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dagon.html">dagon package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dagon.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dagon.api.html">dagon.api package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dagon.cloud.html">dagon.cloud package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">dagon.communication package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dagon.dockercontainer.html">dagon.dockercontainer package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dagon.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dagon.html#module-dagon">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../other.html">Other</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DagOn*</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Modules documentation</a> &raquo;</li>
+        
+          <li><a href="dagon.html">dagon package</a> &raquo;</li>
+        
+      <li>dagon.communication package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/docs/dagon.communication.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dagon-communication-package">
+<h1>dagon.communication package<a class="headerlink" href="#dagon-communication-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-dagon.communication.data_transfer">
+<span id="dagon-batch-module"></span><h3>dagon.batch module<a class="headerlink" href="#module-dagon.communication.data_transfer" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="dagon.communication.data_transfer.GlobusManager">
+<em class="property">class </em><code class="descclassname">dagon.communication.data_transfer.</code><code class="descname">GlobusManager</code><span class="sig-paren">(</span><em>_from</em>, <em>_to</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/data_transfer.html#GlobusManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.data_transfer.GlobusManager" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Manages the data transference between two nodes using globus</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first simple">
+<li><strong>_from</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – endpoint ID of the data source machine</li>
+<li><strong>_to</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – endpoint ID of the data destiny machine</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>_from</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – endpoint ID of the data source machine</li>
+<li><strong>_to</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – endpoint ID of the data destiny machine</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="dagon.communication.data_transfer.GlobusManager.TRANSFER_TOKEN">
+<code class="descname">TRANSFER_TOKEN</code><em class="property"> = 'Ag82ObxMdj80Gxd2ex7oVJWJnPv4dWQ8ndkpblOz51n42G6g96i8Cjqx5zKDE4jM5E2OzrJgMYMlNYC7NmMbYfk6VP'</em><a class="headerlink" href="#dagon.communication.data_transfer.GlobusManager.TRANSFER_TOKEN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dagon.communication.data_transfer.GlobusManager.copy_data">
+<code class="descname">copy_data</code><span class="sig-paren">(</span><em>ori</em>, <em>destiny</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/data_transfer.html#GlobusManager.copy_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.data_transfer.GlobusManager.copy_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>copy data using globus</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ori</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path where the data is in the source machine</li>
+<li><strong>destiny</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path where the data will be put on the destiny machine</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><strong>Exception</strong></a> – a problem occurred during the transference</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dagon.communication.data_transfer.GlobusManager.copy_directory">
+<code class="descname">copy_directory</code><span class="sig-paren">(</span><em>ori</em>, <em>destiny</em>, <em>tc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/data_transfer.html#GlobusManager.copy_directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.data_transfer.GlobusManager.copy_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>copy a directory using globus transfer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ori</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path where the data is in the source machine</li>
+<li><strong>destiny</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path where the data will be put on the destiny machine</li>
+<li><strong>tc</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">globus_sdk.TransferClient</span></code>) – globus transfer client</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">status of the transference</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dagon.communication.data_transfer.GlobusManager.copy_file">
+<code class="descname">copy_file</code><span class="sig-paren">(</span><em>ori</em>, <em>destiny</em>, <em>tc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/data_transfer.html#GlobusManager.copy_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.data_transfer.GlobusManager.copy_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>copy a file using globus</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ori</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path where the data is in the source machine</li>
+<li><strong>destiny</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path where the data will be put on the destiny machine</li>
+<li><strong>tc</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">globus_sdk.TransferClient</span></code>) – globus transfer client</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">status of the transference</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-dagon.communication.ssh"></span><dl class="class">
+<dt id="dagon.communication.ssh.SSHManager">
+<em class="property">class </em><code class="descclassname">dagon.communication.ssh.</code><code class="descname">SSHManager</code><span class="sig-paren">(</span><em>username</em>, <em>host</em>, <em>keypath</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/ssh.html#SSHManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.ssh.SSHManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manages SSH connections with a remote machine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first simple">
+<li><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ssh username</li>
+<li><strong>host</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – IP of the remote machine</li>
+<li><strong>keypath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path to the private key</li>
+<li><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – connection with the remote machine</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ssh username</li>
+<li><strong>host</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – IP of the remote machine</li>
+<li><strong>keypath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path to the private key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="dagon.communication.ssh.SSHManager.create_file">
+<code class="descname">create_file</code><span class="sig-paren">(</span><em>filepath</em>, <em>content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/ssh.html#SSHManager.create_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.ssh.SSHManager.create_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a file on the remote machine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filepath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path to the file</li>
+<li><strong>content</strong> – content of the file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dagon.communication.ssh.SSHManager.execute_command">
+<code class="descname">execute_command</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/ssh.html#SSHManager.execute_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.ssh.SSHManager.execute_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute command in remothe machine over SSH</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – command to execute on the remote machine</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">execution results</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)">object</a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dagon.communication.ssh.SSHManager.get_connection">
+<code class="descname">get_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/ssh.html#SSHManager.get_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.ssh.SSHManager.get_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the connection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">connection</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dagon.communication.ssh.SSHManager.get_ssh_connection">
+<code class="descname">get_ssh_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication/ssh.html#SSHManager.get_ssh_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.ssh.SSHManager.get_ssh_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a new ssh connection with the remote machine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">ssh connection</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-dagon.communication">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dagon.communication" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dagon.communication.is_port_open">
+<code class="descclassname">dagon.communication.</code><code class="descname">is_port_open</code><span class="sig-paren">(</span><em>host</em>, <em>port</em>, <em>timeout=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dagon/communication.html#is_port_open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dagon.communication.is_port_open" title="Permalink to this definition">¶</a></dt>
+<dd><p>verifies if a port is open in a remote host</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>host</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – IP of the remote host</li>
+<li><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – port to check</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – timeout max to check</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if the port is open</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dagon.dockercontainer.html" class="btn btn-neutral float-right" title="dagon.dockercontainer package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dagon.cloud.html" class="btn btn-neutral" title="dagon.cloud package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Raffaele Montella
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
